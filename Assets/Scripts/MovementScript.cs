@@ -29,7 +29,6 @@ public class MovementScript : MonoBehaviour
     }
 
     private void Jump(InputAction.CallbackContext context){
-        Debug.Log("Jump");
         if(rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
@@ -38,17 +37,5 @@ public class MovementScript : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
