@@ -17,40 +17,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float spawnMin = 2f;
     [SerializeField] private float spawnMax = 5f;
 
+    private bool canSpawn = true;
+
     [SerializeField] private string level;
 
-    private void Start()
-    {
-        endButton.gameObject.SetActive(false);
-        startButton.gameObject.SetActive(true);
-        wall.SetActive(true);
-        player.SetActive(true);
-    }
     public void gameStart()
     {
-        endButton.gameObject.SetActive(false);
-        startButton.gameObject.SetActive(false);
-        wall.SetActive(true);
-        player.SetActive(true);
-        Invoke("Spawn", 2);
+        SceneManager.LoadScene("Game Scene");
     }
 
     public void Reset()
     {
-        Invoke("gameStart", 5);
+
     }
 
-    void Spawn()
+    public void Spawn()
     {
-        Instantiate(wall, transform.position, Quaternion.identity);
-        Invoke("Spawn", Random.Range(spawnMin, spawnMax));
+        if (canSpawn)
+        {
+            Instantiate(wall, transform.position, Quaternion.identity);
+            Invoke("Spawn", Random.Range(spawnMin, spawnMax));
+        } 
     }
 
     public void endGame()
     {
-        wall.SetActive(false);
-        player.SetActive(false);
-        endButton.gameObject.SetActive(true);
-
+        SceneManager.LoadScene("End");
     }
 }
