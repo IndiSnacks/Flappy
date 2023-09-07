@@ -42,12 +42,10 @@ public class MovementScript : MonoBehaviour
     /* Player jump action */
     private void Jump(InputAction.CallbackContext context){
 
-        Debug.Log(context);
-
         if(firstJump) 
         {
-            rb.gravityScale = 1f;
-            FindObjectOfType<GameManager>().Spawn();
+            rb.gravityScale = 2f;
+            FindObjectOfType<GameManager>().CanSpawn();
         }
 
         if(rb.velocity.y > 0f)
@@ -65,7 +63,7 @@ public class MovementScript : MonoBehaviour
         if (collision.collider.tag == "Wall")
         {
             jump.Disable();
-            rb.velocity = new Vector2(rb.velocity.x * -10f, rb.velocity.y * -10f);
+            rb.velocity = new Vector2(-10f, -10f);
             Invoke("endGamePlayer", 2f);
         }
     }
