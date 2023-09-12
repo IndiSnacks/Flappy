@@ -9,6 +9,9 @@ public class collsionScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(wall, Time.deltaTime);
+        if (collider.tag == "EndTrigger")
+        {
+            Destroy(wall, Time.deltaTime);
+        }
     }
 }

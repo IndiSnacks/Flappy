@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +9,12 @@ public class MovementScript : MonoBehaviour
 
     [SerializeField] private float jumpPower = 16f;
 
-    [SerializeField] private Rigidbody2D rb; 
+    [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private PlayerInputActions playerControls;
+
+    [SerializeField] private GameObject ScoreUI;
+
 
     private InputAction jump;
     private bool firstJump = true;
@@ -18,6 +22,7 @@ public class MovementScript : MonoBehaviour
     private void Start()
     {
         rb.gravityScale = 0;
+
     }
 
     /* On Awake gets the player input */
@@ -46,6 +51,7 @@ public class MovementScript : MonoBehaviour
         {
             rb.gravityScale = 2f;
             FindObjectOfType<GameManager>().CanSpawn();
+            FindAnyObjectByType<GameManager>().FirstJumpUI();
         }
 
         if(rb.velocity.y > 0f)
@@ -63,8 +69,17 @@ public class MovementScript : MonoBehaviour
         if (collision.collider.tag == "Wall")
         {
             jump.Disable();
+            Debug.Log("here");
             rb.velocity = new Vector2(-10f, -10f);
-            Invoke("endGamePlayer", 2f);
+            Invoke("endGamePlayer", 1.5f);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "PointTrigger")
+        {
+            ScoreUI.GetComponent<PointScore>().score();
         }
     }
 

@@ -10,7 +10,7 @@ public class WallMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(4f, 0f, 0f);
+        //transform.position = new Vector3(4f, transform.position.y, transform.position.z);
     }
 
     void FixedUpdate()

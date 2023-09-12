@@ -10,10 +10,16 @@ public class GameManager : MonoBehaviour
 
 {   //Gameplay Vars
     [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject pointtrigger;
     [SerializeField] private GameObject newWall;
     [SerializeField] private GameObject player;
+
+
     [SerializeField] private Button startButton;
     [SerializeField] private Button endButton;
+
+    [SerializeField] private GameObject JmpStartUI;
+    [SerializeField] private GameObject scoreUI;
 
     [SerializeField] private float spawnTime = 1f;
 
@@ -21,17 +27,29 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private string level;
 
+    private void Start()
+    {
+        scoreUI.SetActive(false);
+    }
+
     public void gameStart()
     {
         SceneManager.LoadScene("Game Scene");
     }
 
+    public void FirstJumpUI()
+    {
+        JmpStartUI.SetActive(false);
+        scoreUI.SetActive(true);
+    }
+
     public void Spawn()
     {
-        Vector3 spawnPosition = new Vector3(wall.transform.position.x, Random.Range(-2.5f, 3f), wall.transform.position.z);
-        newWall = Instantiate(wall, transform.position, Quaternion.identity);
-        newWall.transform.position = spawnPosition;
-        Debug.Log(newWall.transform.position + " " + spawnPosition);
+        Vector3 spawnPosition = new Vector3(
+            4f, 
+            Random.Range(-2.5f, 3f), 
+            transform.position.z);
+        newWall = Instantiate(wall, spawnPosition, Quaternion.identity);
     }
 
     public void CanSpawn()
