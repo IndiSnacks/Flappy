@@ -12,9 +12,4 @@ public class HighScoreUI : MonoBehaviour
     {
         scoreText.text = PlayerPrefs.GetFloat("highScore").ToString();
     }
-
-    public void Reset()
-    {
-        PlayerPrefs.SetFloat("highscore", 0);
-    }
 }
