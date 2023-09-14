@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -32,11 +33,6 @@ public class GameManager : MonoBehaviour
         scoreUI.SetActive(false);
     }
 
-    public void gameStart()
-    {
-        SceneManager.LoadScene("Game Scene");
-    }
-
     public void FirstJumpUI()
     {
         JmpStartUI.SetActive(false);
@@ -59,7 +55,31 @@ public class GameManager : MonoBehaviour
 
     public void endGame()
     {
-        SceneManager.LoadScene("End");
+    
+    }
+
+    public void changeScene(int s)
+    {
+        switch (s)
+        {
+            case 0: //Start
+                SceneManager.LoadScene("Start");
+                break;
+            case 1: //Game
+                SceneManager.LoadScene("Game Scene");
+                break;
+            case 2: //End/Restart
+                Debug.Log("End");
+                SceneManager.LoadScene("End");
+                break;
+            default:
+                // code block
+                break;
+        }
+    }
+    public void Reset()
+    {
+        PlayerPrefs.SetFloat("highScore", 0f);
     }
 
     private void FixedUpdate()

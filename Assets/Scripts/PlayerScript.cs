@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MovementScript : MonoBehaviour
 {
@@ -69,8 +70,8 @@ public class MovementScript : MonoBehaviour
         if (collision.collider.tag == "Wall")
         {
             jump.Disable();
-            Debug.Log("here");
             rb.velocity = new Vector2(-10f, -10f);
+            ScoreUI.GetComponent<PointScore>().saveHighScore();
             Invoke("endGamePlayer", 1.5f);
         }
     }
@@ -85,6 +86,6 @@ public class MovementScript : MonoBehaviour
 
     private void endGamePlayer()
     {
-        FindObjectOfType<GameManager>().endGame();
+        FindObjectOfType<GameManager>().changeScene(2);
     }
 }
