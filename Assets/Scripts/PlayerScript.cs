@@ -16,6 +16,10 @@ public class MovementScript : MonoBehaviour
 
     [SerializeField] private GameObject ScoreUI;
 
+    [SerializeField] private Sprite Falling_Ball;
+
+    [SerializeField] private Sprite Rising_Ball;
+
 
     private InputAction jump;
     private bool firstJump = true;
@@ -87,5 +91,25 @@ public class MovementScript : MonoBehaviour
     private void endGamePlayer()
     {
         FindObjectOfType<GameManager>().changeScene(2);
+    }
+
+    private void spriteChanger()
+    {
+        float velocity = rb.velocity.y;
+        Debug.Log(velocity); 
+
+        if (velocity > 0f)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = Rising_Ball;
+        } 
+        else 
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = Falling_Ball;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        spriteChanger();
     }
 }
